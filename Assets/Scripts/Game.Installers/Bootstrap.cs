@@ -1,20 +1,26 @@
+using Cysharp.Threading.Tasks;
 using Game.Main;
+using Game.UI;
 using VContainer.Unity;
 
 namespace Game.Installers
 {
-	public class Bootstrap : IInitializable
+	public class Bootstrap : IPostInitializable
 	{
-		private readonly ISceneLoader sceneLoader;
+		private readonly IApplicationStarter applicationStarter;
+		private readonly IScreensSystem screensSystem;
 
-		public Bootstrap(ISceneLoader sceneLoader)
+		public Bootstrap(IApplicationStarter applicationStarter, IScreensSystem screensSystem)
 		{
-			this.sceneLoader = sceneLoader;
+			this.applicationStarter = applicationStarter;
+			this.screensSystem = screensSystem;
 		}
-		
-		public void Initialize()
+
+		public async void PostInitialize()
 		{
-			sceneLoader.LoadScene(SceneId.GAME);
+			await screensSystem.Initialize();
+			
+			applicationStarter.Start().Forget();
 		}
 	}
 }

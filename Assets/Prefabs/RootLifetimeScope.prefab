@@ -48,3 +48,5 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  screensManagerConfig: {fileID: 11400000, guid: fa93cee79b3f042dd85ba6603e040244, type: 2}
+  screenSystemCanvas: {fileID: 2789869369885556126, guid: c96d39f71c8b24a17980230897a64a89, type: 3}
