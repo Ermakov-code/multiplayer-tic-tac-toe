@@ -59,7 +59,10 @@ namespace Game.UI.Implementation
 		{
 			foreach (var (type, screen) in instantiatedScreens)
 			{
-				Object.DestroyImmediate(screen.RootTransform.gameObject);
+				if (screen.RootTransform != null)
+				{
+					Object.DestroyImmediate(screen.RootTransform.gameObject);
+				}
 			}
 			
 			instantiatedScreens.Clear();

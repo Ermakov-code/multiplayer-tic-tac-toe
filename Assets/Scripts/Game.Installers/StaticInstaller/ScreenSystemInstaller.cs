@@ -4,7 +4,7 @@ using Game.UI.Implementation;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Installers
+namespace Game.Installers.StaticInstaller
 {
 	public static class ScreenSystemInstaller
 	{
@@ -13,7 +13,8 @@ namespace Game.Installers
 			builder.Register<ScreensManager>(Lifetime.Singleton).As<IScreensManager, IDisposable>();
 			builder.Register<ScreensSystem>(Lifetime.Singleton).As<IScreensSystem>();
 			
-			builder.Register<ScreenControllersInitializable>(Lifetime.Singleton).As<IInitializable, IDisposable>();
+			builder.Register<ScreenSystemInitializable>(Lifetime.Singleton).As<IInitializable>();
+			builder.Register<CanvasInitializable>(Lifetime.Singleton).As<IInitializable>();
 		}
 	}
 }

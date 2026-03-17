@@ -1,3 +1,4 @@
+using Game.Installers.StaticInstaller;
 using Game.Main;
 using Game.UI;
 using Game.UI.Implementation;
@@ -5,27 +6,28 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Game.Installers
+namespace Game.Installers.Scopes
 {
-	public class RootLifetimeScope : LifetimeScope
+	public class GameLifetimeScope : LifetimeScope
 	{
+		[SerializeField]
+		private Camera gameCamera;
 		[SerializeField]
 		private ScreensManagerConfig screensManagerConfig;
 		[SerializeField]
 		private Canvas screenSystemCanvas;
-		
+
 		protected override void Configure(IContainerBuilder builder)
 		{
-			builder.Register<SceneLoader>(Lifetime.Singleton).As<ISceneLoader>();
-			builder.Register<ApplicationStarter>(Lifetime.Singleton).As<IApplicationStarter>();
-			
 			builder.RegisterInstance(screensManagerConfig).As<IScreensManagerConfig>();
-			builder.RegisterComponentInNewPrefab(screenSystemCanvas, Lifetime.Singleton).DontDestroyOnLoad();
+			builder.RegisterInstance(gameCamera).As<Camera>();
+			builder.RegisterComponentInNewPrefab(screenSystemCanvas, Lifetime.Singleton);
 			
 			ScreenSystemInstaller.Install(builder);
 			ScreenControllersInstaller.Install(builder);
 			
-			builder.Register<Bootstrap>(Lifetime.Singleton).As<IPostInitializable>();
+			builder.Register<GameStarter>(Lifetime.Singleton).As<IGameStarter>();
+			builder.RegisterEntryPoint<GameEntryPoint>();
 		}
 	}
 }
