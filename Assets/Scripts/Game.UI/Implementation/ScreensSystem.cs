@@ -21,7 +21,7 @@ namespace Game.UI.Implementation
 			return screensManager.Initialize();
 		}
 
-		public async UniTask<T> Push<T>() where T : IScreenController
+		public async UniTask<T> Push<T, TData>(TData data) where T : IScreenController
 		{
 			var screenController = GetScreenController<T>();
 			
@@ -33,6 +33,11 @@ namespace Game.UI.Implementation
 			history.Push(screenController);
 			
 			screenController.SetScreen(screen);
+
+			if (screenController is IScreenData<TData> screenData)
+			{
+				screenData.SetData(data);
+			}
 
 			if (inFirstCreate)
 			{
@@ -56,6 +61,14 @@ namespace Game.UI.Implementation
 			
 			screenController.OnHide();
 			screen.SetActive(false);
+		}
+
+		public void PopAll()
+		{
+			while (history.Count > 0)
+			{
+				Pop().Forget();
+			}
 		}
 
 		public void RegisterScreenController(IScreenController screenController)

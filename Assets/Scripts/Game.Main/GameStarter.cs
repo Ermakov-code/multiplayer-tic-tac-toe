@@ -15,7 +15,7 @@ namespace Game.Main
 		
 		public async UniTask Start()
 		{
-			await screensSystem.Push<MainScreenController>();
+			await screensSystem.PushAsync<MainScreenController>();
 		}
 	}
 }

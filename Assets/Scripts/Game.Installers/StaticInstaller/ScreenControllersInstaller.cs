@@ -11,6 +11,8 @@ namespace Game.Installers.StaticInstaller
 		public static void Install(IContainerBuilder builder)
 		{
 			builder.Register<MainScreenController>(Lifetime.Singleton).As<IScreenController>();
+			builder.Register<TicTacToeScreenController>(Lifetime.Singleton).As<IScreenController>();
+			builder.Register<TicTacToeResultScreenController>(Lifetime.Singleton).As<IScreenController>();
 			
 			builder.Register<ScreenControllersInitializable>(Lifetime.Singleton).As<IInitializable, IDisposable>();
 		}

@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Implementation.ScreensManagerConfig
   screenPrefabs:
   - {fileID: 204953644801321024, guid: 81369d813bf694b57a56088a07ae9a8c, type: 3}
+  - {fileID: 1395440858230249088, guid: 81c5b32ecb6714145acd825798785012, type: 3}
+  - {fileID: 8085467448597241018, guid: c5512be2fbbac4ba09dafa81f784a477, type: 3}

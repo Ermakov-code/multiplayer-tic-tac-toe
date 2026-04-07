@@ -1,5 +1,7 @@
 using Game.Installers.StaticInstaller;
 using Game.Main;
+using Game.Main.Modes;
+using Game.Main.Modes.Implementation;
 using Game.UI;
 using Game.UI.Implementation;
 using UnityEngine;
@@ -25,6 +27,8 @@ namespace Game.Installers.Scopes
 			
 			ScreenSystemInstaller.Install(builder);
 			ScreenControllersInstaller.Install(builder);
+			
+			builder.Register<LocalTicTacToeGameMode>(Lifetime.Singleton).As<IGameMode>();
 			
 			builder.Register<GameStarter>(Lifetime.Singleton).As<IGameStarter>();
 			builder.RegisterEntryPoint<GameEntryPoint>();
